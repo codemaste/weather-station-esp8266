@@ -1,3 +1,5 @@
-# weather-station-esp8266
-Weather station based on esp8266
-aaa
+# esp8266weather
+Weather station ESP8266 based with sensors
+
+# Demo
+https://dobrolubov.com/
