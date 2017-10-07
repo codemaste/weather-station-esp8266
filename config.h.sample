@@ -1,6 +1,6 @@
 char wifissid[] = "";      // your network SSID (name)
 char wifipass[] = "";   // your network password
 
-char narodmonMac[] = "60-01-94-20-21-50"; // mac address for narodmon.ru service
+char narodmonMac[] = "11-22-33-44-55-66"; // mac address for narodmon.ru service
 
 
