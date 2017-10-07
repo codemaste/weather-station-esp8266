@@ -83,10 +83,10 @@ float dust {-3000};
 
 ///////////////////////////////////////////
 int vent_mode = -1; // -1 auto, 0 off, 1, 2, 3, 4
-int bound_1 = 450;
-int bound_2 = 500;
-int bound_3 = 550;
-int bound_4 = 600;
+int bound_1 = 500;
+int bound_2 = 600;
+int bound_3 = 9550;
+int bound_4 = 9600;
 int recomend_vent = 0;
 int current_vent = 0;
 
