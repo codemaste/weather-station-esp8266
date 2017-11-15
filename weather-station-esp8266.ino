@@ -23,6 +23,7 @@
 #include <Adafruit_AM2315.h>
 #include <Adafruit_BMP085.h> 
 #include <Adafruit_HTU21DF.h>
+#include <Adafruit_BME280.h> 
 #include <DHT.h> 
 #include <U8g2lib.h>
 /*
@@ -44,6 +45,7 @@ DHT dht(DHT_PIN, DHT_VERSION); //define temperature and humidity sensor
 //RtcDS1307<TwoWire> Rtc(Wire);
 Adafruit_AM2315 am2315;
 Adafruit_BMP085 bmp;
+Adafruit_BME280 bme;
 Adafruit_ADS1115 ads(0x4A); //Здесь указываем адрес устройства
 Adafruit_HTU21DF htu = Adafruit_HTU21DF();
 
@@ -69,6 +71,9 @@ float am_t {-3000};
 float am_h {-3000};
 float bmp_t {-3000};
 float bmp_p {-3000};
+float bme_t {-3000};
+float bme_h {-3000};
+float bme_p {-3000};
 
 //#define SRC_AVG_NUM 900
 #define SRC_AVG_NUM 60
@@ -121,16 +126,16 @@ float measureMqOne (int* src, int channel) {
 }
 
 void measureMQ () {
-  manageVent (true); // turn ON dust LED
+//  manageVent (true); // turn ON dust LED
   
   mq136 = measureMqOne (mq136_src, 1);
   mq4 = measureMqOne (mq4_src, 2);
   mq137 = measureMqOne (mq137_src, 3);
 
-  delayMicroseconds (280);
-  dust = measureMqOne (dust_src, 0);
+//  delayMicroseconds (280);
+//  dust = measureMqOne (dust_src, 0);
 
-  manageVent (false); // turn OFF dust LED
+//  manageVent (false); // turn OFF dust LED
 }
 
 void runMeasurements() {
@@ -138,9 +143,7 @@ void runMeasurements() {
         if (i>100 && i<15000) co2 = i;
         else co2 = -2000;
 
-        i =  dht.readHumidity();
-        if (i>-1000 && i<1000) dht_h = i;
-        else dht_h = -2000;
+        // htu21
         
         i = htu.readTemperature();
         if (i>-1000 && i<1000) htu_t = i;
@@ -149,10 +152,18 @@ void runMeasurements() {
         i =  htu.readHumidity();
         if (i>-1000 && i<1000) htu_h = i;
         else htu_h = -2000;
+
+        // dht22
+
+        i =  dht.readHumidity();
+        if (i>-1000 && i<1000) dht_h = i;
+        else dht_h = -2000;
         
         i = dht.readTemperature();
         if (i>-1000 && i<1000) dht_t = i;
         else dht_t = -2000;
+
+        // bmp180
 
         i = bmp.readTemperature();
         if (i>-1000 && i<1000) bmp_t = i;
@@ -161,6 +172,22 @@ void runMeasurements() {
         i = (float)0.0075 * bmp.readPressure();
         if (i>10 && i<1000) bmp_p = i;
         else bmp_p = -2000;
+
+        // bme280
+
+        i = bme.readTemperature();
+        if (i>-1000 && i<1000) bme_t = i;
+        else bme_t = -2000;
+
+        i =  bme.readHumidity();
+        if (i>-1000 && i<1000) bme_h = i;
+        else bme_h = -2000;
+        
+        i = (float)0.0075 * bme.readPressure();
+        if (i>10 && i<1000) bme_p = i;
+        else bme_p = -2000;
+
+        // am2315
 
         if (!am2315.readTemperatureAndHumidity (am_t, am_h)) {
           am_t = -2000;
@@ -201,7 +228,7 @@ void manageVent (bool dustLed) {
   if (vent_speed == 3) outMask = 0xFF ^ 16 ^ 32;
   if (vent_speed == 4) outMask = 0xFF ^ 16 ^ 32 ^ 128;
 
-  if (dustLed) outMask ^= 1 + 2 + 4 + 8; 
+//  if (dustLed) outMask ^= 1 + 2 + 4 + 8; 
 
   Wire.beginTransmission (0x3F);
   Wire.write (outMask);
@@ -283,6 +310,7 @@ void setup() {
         
         if (!am2315.begin ()) am_t = -2000;
         if (!bmp.begin ()) bmp_t = -2000;
+        if (!bme.begin (0x76)) bme_t = -2001;
 
         // Init display
         u8g2.begin();

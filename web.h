@@ -67,7 +67,7 @@ String HTTPgenIndexPage () {
   s += "<div class='panel panel-default'>";
   s += "<div class='panel-heading'>MQ</div>";
   s += "<div class='panel-body'>";
-  s += "DUST ";
+/*  s += "DUST ";
   if (dust >= protect_dust) s += "<span class='label label-danger'>";
   s += String(dust); 
   if (dust >= protect_dust) s += "</span>";
@@ -77,7 +77,7 @@ String HTTPgenIndexPage () {
   s += "<input type='text' name='v' size='4' value='" + String(protect_dust) + "' />";
   s += "<input type='submit' value='set' />";
   s += "</form>";
-  s += "<br />";  
+  s += "<br />";  */
   s += "MQ4 ";
   if (mq4 >= protect_mq4) s += "<span class='label label-danger'>";
   s += String(mq4); 
@@ -143,6 +143,16 @@ String HTTPgenIndexPage () {
   s += "" + String(am_h) + "%";
   s += "</div>";
   s += "</div>";
+
+  s += "<div class='panel panel-success'>";
+  s += "<div class='panel-heading'>BME-280</div>";
+  s += "<div class='panel-body'>";
+  s += "" + String(bme_t) + "&deg;C<br/>";
+  s += "" + String(bme_h) + "%<br/>";
+  s += "" + String(bme_p) + "mm";
+  s += "</div>";
+  s += "</div>";
+  
   s += "</div>";
   
   s += "<div class='col-xs-6 col-sm-6 col-md-2'>";
@@ -185,6 +195,9 @@ String HTTPgenXML () {
   s += "<am_h>" + String(am_h) + "</am_h>" + "\n";
   s += "<bmp_t>" + String(bmp_t) + "</bmp_t>" + "\n";
   s += "<bmp_p>" + String(bmp_p) + "</bmp_p>" + "\n";
+  s += "<bme_t>" + String(bme_t) + "</bme_t>" + "\n";
+  s += "<bme_h>" + String(bme_h) + "</bme_h>" + "\n";
+  s += "<bme_p>" + String(bme_p) + "</bme_p>" + "\n";
 
   return s;
 }
