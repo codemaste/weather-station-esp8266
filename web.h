@@ -54,7 +54,7 @@ String HTTPgenIndexPage () {
   s += "<div class='row'>";
 
   s += "<div class='col-xs-12 col-sm-12 col-md-4'>";
-  s += "<div class='panel panel-primary'>";
+  s += "<div class='panel panel-success'>";
   s += "<div class='panel-heading'>CO<sub>2</sub></div>";
   s += "<div class='panel-body'>";
   s += "<h2>" + String(co2) + " ppm</h2>";
@@ -64,7 +64,51 @@ String HTTPgenIndexPage () {
   s += "</div>";
 
   s += "<div class='col-xs-6 col-sm-6 col-md-2'>";
-  s += "<div class='panel panel-default'>";
+  s += "<div class='panel panel-success'>";
+  s += "<div class='panel-heading'>DHT22</div>";
+  s += "<div class='panel-body'>";
+  s += "" + String(dht_t) + "&deg;C<br/>";
+  s += "" + String(dht_h) + "%";
+  s += "</div>";
+  s += "</div>";
+  
+
+  s += "<div class='panel panel-success'>";
+  s += "<div class='panel-heading'>HTU21</div>";
+  s += "<div class='panel-body'>";
+  s += "" + String(htu_t) + "&deg;C<br/>";
+  s += "" + String(htu_h) + "%";
+  s += "</div>";
+  s += "</div>";
+  
+  s += "</div>";
+
+
+
+
+s += "<div class='col-xs-6 col-sm-6 col-md-2'>";
+  s += "<div class='panel panel-primary'>";
+  s += "<div class='panel-heading'>AM2315</div>";
+  s += "<div class='panel-body'>";
+  s += "" + String(am_t) + "&deg;C<br/>";
+  s += "" + String(am_h) + "%";
+  s += "</div>";
+  s += "</div>";
+
+  s += "<div class='panel panel-primary'>";
+  s += "<div class='panel-heading'>BME280</div>";
+  s += "<div class='panel-body'>";
+  s += "" + String(bme_t) + "&deg;C<br/>";
+  s += "" + String(bme_h) + "%<br/>";
+  s += "" + String(bme_p) + "mm";
+  s += "</div>";
+  s += "</div>";
+  
+  s += "</div>";
+  
+
+  s += "<div class='col-xs-6 col-sm-6 col-md-2'>";
+  s += "<div class='panel panel-primary'>";
   s += "<div class='panel-heading'>MQ</div>";
   s += "<div class='panel-body'>";
 /*  s += "DUST ";
@@ -115,49 +159,10 @@ String HTTPgenIndexPage () {
   s += "</div>";
   s += "</div>";
   
+  
   s += "<div class='col-xs-6 col-sm-6 col-md-2'>";
   s += "<div class='panel panel-default'>";
-  s += "<div class='panel-heading'>DHT22</div>";
-  s += "<div class='panel-body'>";
-  s += "" + String(dht_t) + "&deg;C<br/>";
-  s += "" + String(dht_h) + "%";
-  s += "</div>";
-  s += "</div>";
-  
-
-  s += "<div class='panel panel-default'>";
-  s += "<div class='panel-heading'>HTU21</div>";
-  s += "<div class='panel-body'>";
-  s += "" + String(htu_t) + "&deg;C<br/>";
-  s += "" + String(htu_h) + "%";
-  s += "</div>";
-  s += "</div>";
-  
-  s += "</div>";
-  
-  s += "<div class='col-xs-6 col-sm-6 col-md-2'>";
-  s += "<div class='panel panel-success'>";
-  s += "<div class='panel-heading'>AM2315</div>";
-  s += "<div class='panel-body'>";
-  s += "" + String(am_t) + "&deg;C<br/>";
-  s += "" + String(am_h) + "%";
-  s += "</div>";
-  s += "</div>";
-
-  s += "<div class='panel panel-success'>";
-  s += "<div class='panel-heading'>BME-280</div>";
-  s += "<div class='panel-body'>";
-  s += "" + String(bme_t) + "&deg;C<br/>";
-  s += "" + String(bme_h) + "%<br/>";
-  s += "" + String(bme_p) + "mm";
-  s += "</div>";
-  s += "</div>";
-  
-  s += "</div>";
-  
-  s += "<div class='col-xs-6 col-sm-6 col-md-2'>";
-  s += "<div class='panel panel-info'>";
-  s += "<div class='panel-heading'>BMP-180</div>";
+  s += "<div class='panel-heading'>BMP180</div>";
   s += "<div class='panel-body'>";
   s += "" + String(bmp_t) + "&deg;C<br/>";
   s += "" + String(bmp_p) + "mm";
@@ -165,6 +170,8 @@ String HTTPgenIndexPage () {
   s += "</div>";
   s += "</div>";
 
+
+  
   s += "</div>"; // row
 
   
